@@ -29,7 +29,7 @@ export default function HeroBanner() {
 
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-foreground leading-tight">
               Discover & Read <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-purple-400 to-pink-500">
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-500 via-purple-400 to-pink-500">
                 Original Ebooks
               </span>
             </h1>
@@ -44,7 +44,7 @@ export default function HeroBanner() {
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
               <Link
                 href="/browse"
-                className="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-medium rounded-xl hover:opacity-95 shadow-lg shadow-purple-500/20 transition-all flex items-center justify-center gap-2 group"
+                className="w-full sm:w-auto px-8 py-3.5 bg-linear-to-r from-purple-600 to-pink-600 text-white font-medium rounded-xl hover:opacity-95 shadow-lg shadow-purple-500/20 transition-all flex items-center justify-center gap-2 group"
               >
                 <span>Browse Ebooks</span>
                 <FaArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -77,9 +77,9 @@ export default function HeroBanner() {
 
           {/* Right Column: Premium Ebook Artwork Showcase */}
           <div className="lg:col-span-5 flex justify-center relative">
-            <div className="relative w-72 h-96 sm:w-80 sm:h-[420px] bg-gradient-to-tr from-purple-900/40 to-pink-900/40 border border-purple-500/30 rounded-2xl p-6 shadow-2xl flex flex-col justify-between overflow-hidden backdrop-blur-sm">
+            <div className="relative w-72 h-96 sm:w-80 sm:h-105 bg-linear-to-tr from-purple-900/40 to-pink-900/40 border border-purple-500/30 rounded-2xl p-6 shadow-2xl flex flex-col justify-between overflow-hidden backdrop-blur-sm">
               {/* Decorative Book Binder Effect */}
-              <div className="absolute left-0 top-0 bottom-0 w-3 bg-gradient-to-r from-black/30 to-transparent border-r border-white/5" />
+              <div className="absolute left-0 top-0 bottom-0 w-3 bg-linear-to-r from-black/30 to-transparent border-r border-white/5" />
 
               <div className="space-y-4 relative z-10 pl-4">
                 <div className="flex items-center gap-2 text-purple-400 text-xs tracking-widest uppercase font-semibold">

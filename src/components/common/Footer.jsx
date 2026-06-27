@@ -41,7 +41,7 @@ export default function Footer() {
           <div className="lg:col-span-2 space-y-4">
             <Link
               href="/"
-              className="flex items-center gap-2 font-bold text-2xl tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500"
+              className="flex items-center gap-2 font-bold text-2xl tracking-tight text-transparent bg-clip-text bg-linear-to-r from-purple-500 to-pink-500"
             >
               <FaBookOpen className="w-7 h-7 text-purple-500" />
               <span>Fable</span>
