@@ -90,7 +90,7 @@ export default function Navbar() {
               </button>
             ) : (
               <Link
-                href="/login"
+                href="/signIn"
                 className="px-4 py-2 rounded-lg text-sm font-medium bg-purple-600 hover:bg-purple-700 text-white transition-all flex items-center gap-1 shadow-md shadow-purple-500/10"
               >
                 <LogIn className="w-4 h-4" />
@@ -163,7 +163,7 @@ export default function Navbar() {
               </button>
             ) : (
               <Link
-                href="/login"
+                href="/signIn"
                 onClick={() => setIsOpen(false)}
                 className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium bg-purple-600 hover:bg-purple-700 text-white transition-all shadow-md"
               >

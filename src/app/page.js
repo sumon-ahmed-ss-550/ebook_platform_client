@@ -1,10 +1,13 @@
+import EbookGenres from "@/components/home/EbookGenres";
 import HeroBanner from "@/components/home/HeroBanner";
-import Image from "next/image";
+import Testimonials from "@/components/home/Testimonials";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div>
+    <main>
       <HeroBanner></HeroBanner>
-    </div>
+      <EbookGenres></EbookGenres>
+      <Testimonials></Testimonials>
+    </main>
   );
 }
