@@ -91,7 +91,7 @@ export default function EbookGenres() {
             initial={{ opacity: 0, y: -10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-bold tracking-tight bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent"
+            className="text-3xl md:text-4xl font-bold tracking-tight bg-linear-to-r from-white to-slate-400 bg-clip-text text-transparent"
           >
             Explore by Genres
           </motion.h2>
@@ -128,13 +128,13 @@ export default function EbookGenres() {
               >
                 {/* Background Glow Effect */}
                 <div
-                  className={`absolute -right-8 -bottom-8 w-24 h-24 rounded-full bg-gradient-to-br ${genre.color} opacity-10 blur-xl group-hover:opacity-25 transition-opacity duration-300`}
+                  className={`absolute -right-8 -bottom-8 w-24 h-24 rounded-full bg-linear-to-br ${genre.color} opacity-10 blur-xl group-hover:opacity-25 transition-opacity duration-300`}
                 />
 
                 <div className="flex flex-col items-center text-center space-y-4">
                   {/* Icon Container */}
                   <div
-                    className={`p-4 rounded-xl bg-gradient-to-br ${genre.color} text-white shadow-lg shadow-black/20 group-hover:scale-110 transition-transform duration-300`}
+                    className={`p-4 rounded-xl bg-linear-to-br ${genre.color} text-white shadow-lg shadow-black/20 group-hover:scale-110 transition-transform duration-300`}
                   >
                     <Icon className="w-6 h-6" />
                   </div>

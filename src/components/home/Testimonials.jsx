@@ -59,7 +59,7 @@ export default function Testimonials() {
   return (
     <section className="py-20 bg-slate-950 text-white relative overflow-hidden border-t border-slate-900">
       {/* Background Decorative Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-indigo-500/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-125 h-125 bg-indigo-500/5 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
@@ -77,7 +77,7 @@ export default function Testimonials() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="mt-2 text-3xl md:text-4xl font-bold bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent"
+            className="mt-2 text-3xl md:text-4xl font-bold bg-linear-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent"
           >
             Loved by Readers & Writers
           </motion.h2>
