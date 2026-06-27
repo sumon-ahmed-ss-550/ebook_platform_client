@@ -34,8 +34,8 @@ export default function HeroBanner() {
               </span>
             </h1>
 
-            <p className="text-base sm:text-lg text-muted-foreground max-w-xl mx-auto lg:mx-0 leading-relaxed">
-              Step into Fable—the premium ecosystem tailored for indie writers
+            <p className="text-base sm:text-lg text-muted-foreground max-w-xl mx-auto lg:mx-0 leading-relaxed text-black">
+              Step into Fable the premium ecosystem tailored for indie writers
               and avid readers alike. Publish globally, track insights, or sink
               into your next obsession flawlessly.
             </p>
@@ -62,15 +62,21 @@ export default function HeroBanner() {
             <div className="grid grid-cols-3 gap-6 pt-8 border-t border-border max-w-md mx-auto lg:mx-0">
               <div>
                 <h4 className="text-2xl font-bold text-foreground">10K+</h4>
-                <p className="text-xs text-muted-foreground">Premium Books</p>
+                <p className="text-xs text-muted-foreground text-black">
+                  Premium Books
+                </p>
               </div>
               <div>
                 <h4 className="text-2xl font-bold text-foreground">5K+</h4>
-                <p className="text-xs text-muted-foreground">Indie Authors</p>
+                <p className="text-xs text-muted-foreground text-black">
+                  Indie Authors
+                </p>
               </div>
               <div>
                 <h4 className="text-2xl font-bold text-foreground">100K+</h4>
-                <p className="text-xs text-muted-foreground">Active Readers</p>
+                <p className="text-xs text-muted-foreground text-black">
+                  Active Readers
+                </p>
               </div>
             </div>
           </div>
