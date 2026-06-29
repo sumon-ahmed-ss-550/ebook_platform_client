@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Fable Banner](https://i.ibb.co.com/sdh3s2sD/Screenshot-2026-06-29-215427.png)
+![Fable Banner](https://i.ibb.co.com/nsgfMDRh/Screenshot-2026-06-29-215555.png)
 
 **Discover & Read Original Ebooks — A platform connecting readers with talented writers.**
 
