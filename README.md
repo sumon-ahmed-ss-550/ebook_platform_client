@@ -341,10 +341,10 @@ cd fable-client && npm run dev
 
 | Page         | Preview                                   |
 | ------------ | ----------------------------------------- |
-| 🏠 Home      | ![Home](https://i.ibb.co.com/v6KbXqwx/Screenshot-2026-06-29-at-22-01-43-Create-Next-App.png)           |
-| 📚 Browse    | ![Browse](./screenshots/browse.png)       |
-| 📖 Details   | ![Details](./screenshots/details.png)     |
-| 📊 Dashboard | ![Dashboard](./screenshots/dashboard.png) |
+| 🏠 Home      | ![Home](https://i.ibb.co.com/8L4M9XG3/Screenshot-2026-06-29-at-22-07-50-Create-Next-App.png)           |
+| 📚 Browse    | ![Browse](https://i.ibb.co.com/BH7VvMvN/Screenshot-2026-06-29-at-22-04-10-Fable-Browse-Ebooks.png)       |
+| 📖 Details   | ![Details](https://i.ibb.co.com/0pRpGCDJ/Screenshot-2026-06-29-at-22-05-12-Create-Next-App.png)     |
+| 📊 Dashboard | ![Dashboard](https://i.ibb.co.com/nMCZFzr3/Screenshot-2026-06-29-at-22-06-28-Create-Next-App.png) |
 
 ---
 
