@@ -95,7 +95,7 @@ export default function EbookDetails({ bookId }) {
             className="bg-slate-900/60 backdrop-blur-md rounded-2xl p-6 border border-slate-800 shadow-2xl space-y-6"
           >
             {/* High Definition Premium Book Cover */}
-            <div className="relative aspect-[3/4] w-full rounded-xl overflow-hidden group shadow-[0_20px_50px_rgba(0,0,0,0.5)] bg-slate-950">
+            <div className="relative aspect-3/4 w-full rounded-xl overflow-hidden group shadow-[0_20px_50px_rgba(0,0,0,0.5)] bg-slate-950">
               <Image
                 src={book.image}
                 alt={book.title}
@@ -104,7 +104,7 @@ export default function EbookDetails({ bookId }) {
                 className="object-cover group-hover:scale-105 transition-transform duration-700"
                 sizes="(max-w-7xl) 100vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-slate-950/70 via-transparent to-transparent" />
 
               {/* Genre Badge */}
               <span className="absolute top-4 left-4 bg-emerald-500/90 text-slate-950 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full backdrop-blur-sm">
@@ -288,7 +288,7 @@ export default function EbookDetails({ bookId }) {
           </motion.div>
 
           {/* Dynamic Render Sandbox Panel */}
-          <div className="min-h-[180px] bg-slate-900/20 rounded-xl p-2">
+          <div className="min-h-45 bg-slate-900/20 rounded-xl p-2">
             <AnimatePresence mode="wait">
               {activeTab === "synopsis" && (
                 <motion.div
