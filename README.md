@@ -341,7 +341,7 @@ cd fable-client && npm run dev
 
 | Page         | Preview                                   |
 | ------------ | ----------------------------------------- |
-| 🏠 Home      | ![Home](https://i.ibb.co.com/3y9nt88z/Screenshot-2026-06-29-at-21-58-15-Create-Next-App.png)           |
+| 🏠 Home      | ![Home](https://i.ibb.co.com/v6KbXqwx/Screenshot-2026-06-29-at-22-01-43-Create-Next-App.png)           |
 | 📚 Browse    | ![Browse](./screenshots/browse.png)       |
 | 📖 Details   | ![Details](./screenshots/details.png)     |
 | 📊 Dashboard | ![Dashboard](./screenshots/dashboard.png) |
