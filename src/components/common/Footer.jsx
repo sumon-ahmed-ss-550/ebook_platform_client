@@ -48,8 +48,8 @@ export default function Footer() {
             </Link>
             <p className="text-sm max-w-sm leading-relaxed">
               Fable is a modern SaaS platform designed for reader communities
-              and indie authors. Discover, purchase, and read original ebooks
-              with absolute freedom.
+              and and indie authors. Discover, purchase, and read original
+              ebooks with absolute freedom.
             </p>
             {/* Social Icons using react-icons/fa */}
             <div className="flex items-center gap-4 pt-2">
