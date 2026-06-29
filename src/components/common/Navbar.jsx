@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import Image from "next/image"; // Next.js Image component import করা হলো
+import { usePathname, useRouter } from "next/navigation";
 import {
   Menu,
   X,
@@ -11,14 +12,35 @@ import {
   LayoutDashboard,
   Home,
   Book,
+  User,
+  LogOut,
+  ChevronDown,
 } from "lucide-react";
+import { authClient } from "@/app/lib/auth-client";
+// আপনার প্রজেক্টের সঠিক পাথ অনুযায়ী authClient ইমপোর্ট করুন
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const pathname = usePathname();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
-  // ইউজার লগইন স্টেট ট্র্যাকিংয়ের জন্য ডামি ডাটা (পরবর্তীতে রিয়েল অথেনটিকেশনের সাথে কানেক্ট হবে)
-  const [user, setUser] = useState(null);
+  const pathname = usePathname();
+  const router = useRouter();
+
+  // Better Auth সেশন ডাটা
+  const { data: session, isPending } = authClient.useSession();
+  const user = session?.user;
+
+  // বাইরে ক্লিক করলে ড্রপডাউন বন্ধ করার জন্য
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const navLinks = [
     { name: "Home", href: "/", icon: <Home className="w-4 h-4" /> },
@@ -29,8 +51,25 @@ export default function Navbar() {
     },
   ];
 
-  // একটিভ রুট হাইলাইট করার হেল্পার ফাংশন
   const isActive = (path) => pathname === path;
+
+  const handleLogout = async () => {
+    await authClient.signOut({
+      fetchOptions: {
+        onSuccess: () => {
+          router.push("/");
+          setIsDropdownOpen(false);
+          setIsOpen(false);
+        },
+      },
+    });
+  };
+
+  const getDashboardHref = () => {
+    if (user?.role === "admin") return "/admin/dashboard";
+    if (user?.role === "author") return "/author/dashboard";
+    return "/dashboard";
+  };
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-md">
@@ -62,33 +101,87 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
-
-            {/* Role-Based Dashboard Link (যদি ইউজার লগইন থাকে) */}
-            {user && (
-              <Link
-                href="/dashboard"
-                className={`text-sm font-medium transition-colors hover:text-purple-500 flex items-center gap-1 ${
-                  isActive("/dashboard")
-                    ? "text-purple-500"
-                    : "text-muted-foreground"
-                }`}
-              >
-                <LayoutDashboard className="w-4 h-4" />
-                Dashboard
-              </Link>
-            )}
           </div>
 
-          {/* Auth Buttons (Desktop) */}
+          {/* User Auth Section (Desktop) */}
           <div className="hidden md:flex items-center gap-4">
-            {user ? (
-              <button
-                onClick={() => setUser(null)}
-                className="px-4 py-2 rounded-lg text-sm font-medium border border-border hover:bg-accent transition-all"
-              >
-                Logout
-              </button>
+            {isPending ? (
+              <div className="w-8 h-8 rounded-full bg-muted animate-pulse" />
+            ) : user ? (
+              /* User Dropdown Menu */
+              <div className="relative" ref={dropdownRef}>
+                <button
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                  className="flex items-center gap-2 p-1.5 rounded-full hover:bg-accent transition-all focus:outline-none"
+                >
+                  {user.image ? (
+                    <div className="relative w-8 h-8 rounded-full overflow-hidden border border-purple-500/30">
+                      <Image
+                        src={user.image}
+                        alt={user.name || "User"}
+                        fill
+                        sizes="32px"
+                        className="object-cover"
+                        priority
+                      />
+                    </div>
+                  ) : (
+                    <div className="w-8 h-8 rounded-full bg-purple-500/10 text-purple-500 flex items-center justify-center font-semibold text-sm border border-purple-500/20">
+                      {user.name?.charAt(0).toUpperCase() || "U"}
+                    </div>
+                  )}
+                  <ChevronDown
+                    className={`w-4 h-4 text-muted-foreground transition-transform duration-200 ${isDropdownOpen ? "rotate-180" : ""}`}
+                  />
+                </button>
+
+                {/* Dropdown Card (আকর্ষণীয় Background Color সহ) */}
+                {isDropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-56 rounded-xl border border-purple-500/20 bg-gradient-to-b from-background via-purple-950/10 to-background p-1.5 shadow-xl shadow-purple-500/5 backdrop-blur-xl animate-in fade-in-50 zoom-in-95 duration-100">
+                    <div className="px-3 py-2 border-b border-border/60 mb-1">
+                      <p className="text-sm font-semibold truncate bg-clip-text bg-gradient-to-r from-foreground to-foreground/80">
+                        {user.name}
+                      </p>
+                      <p className="text-xs text-muted-foreground truncate">
+                        {user.email}
+                      </p>
+                      {user.role && (
+                        <span className="inline-block mt-1 text-[10px] uppercase font-bold bg-purple-500/10 text-purple-400 px-1.5 py-0.5 rounded border border-purple-500/20">
+                          {user.role}
+                        </span>
+                      )}
+                    </div>
+
+                    <Link
+                      href="/profile"
+                      onClick={() => setIsDropdownOpen(false)}
+                      className="flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-lg text-muted-foreground hover:text-purple-400 hover:bg-purple-500/5 transition-colors"
+                    >
+                      <User className="w-4 h-4" />
+                      Profile
+                    </Link>
+
+                    <Link
+                      href={getDashboardHref()}
+                      onClick={() => setIsDropdownOpen(false)}
+                      className="flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-lg text-muted-foreground hover:text-purple-400 hover:bg-purple-500/5 transition-colors"
+                    >
+                      <LayoutDashboard className="w-4 h-4" />
+                      Dashboard
+                    </Link>
+
+                    <button
+                      onClick={handleLogout}
+                      className="w-full flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-lg text-destructive hover:bg-destructive/10 transition-colors text-left"
+                    >
+                      <LogOut className="w-4 h-4" />
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
             ) : (
+              /* Login Button */
               <Link
                 href="/signIn"
                 className="px-4 py-2 rounded-lg text-sm font-medium bg-purple-600 hover:bg-purple-700 text-white transition-all flex items-center gap-1 shadow-md shadow-purple-500/10"
@@ -135,43 +228,76 @@ export default function Navbar() {
             </Link>
           ))}
 
-          {user && (
-            <Link
-              href="/dashboard"
-              onClick={() => setIsOpen(false)}
-              className={`flex items-center gap-2 p-2 rounded-lg text-base font-medium transition-colors ${
-                isActive("/dashboard")
-                  ? "bg-purple-500/10 text-purple-500"
-                  : "text-muted-foreground hover:bg-accent"
-              }`}
-            >
-              <LayoutDashboard className="w-4 h-4" />
-              Dashboard
-            </Link>
-          )}
+          {/* Mobile Auth/User Menu */}
+          {!isPending && (
+            <div className="pt-4 border-t border-border space-y-2">
+              {user ? (
+                <>
+                  {/* Mobile User Profile Info */}
+                  <div className="flex items-center gap-3 px-2 py-1 mb-2">
+                    {user.image ? (
+                      <div className="relative w-10 h-10 rounded-full overflow-hidden border border-purple-500/30">
+                        <Image
+                          src={user.image}
+                          alt={user.name || "User"}
+                          fill
+                          sizes="40px"
+                          className="object-cover"
+                        />
+                      </div>
+                    ) : (
+                      <div className="w-10 h-10 rounded-full bg-purple-500/10 text-purple-500 flex items-center justify-center font-bold">
+                        {user.name?.charAt(0).toUpperCase()}
+                      </div>
+                    )}
+                    <div>
+                      <p className="text-sm font-semibold text-foreground">
+                        {user.name}
+                      </p>
+                      <p className="text-xs text-muted-foreground">
+                        {user.email}
+                      </p>
+                    </div>
+                  </div>
 
-          <div className="pt-4 border-t border-border">
-            {user ? (
-              <button
-                onClick={() => {
-                  setUser(null);
-                  setIsOpen(false);
-                }}
-                className="w-full text-center px-4 py-2.5 rounded-lg text-sm font-medium border border-border hover:bg-accent transition-all"
-              >
-                Logout
-              </button>
-            ) : (
-              <Link
-                href="/signIn"
-                onClick={() => setIsOpen(false)}
-                className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium bg-purple-600 hover:bg-purple-700 text-white transition-all shadow-md"
-              >
-                <LogIn className="w-4 h-4" />
-                Login
-              </Link>
-            )}
-          </div>
+                  <Link
+                    href="/profile"
+                    onClick={() => setIsOpen(false)}
+                    className="flex items-center gap-2 p-2 rounded-lg text-base font-medium text-muted-foreground hover:bg-accent"
+                  >
+                    <User className="w-4 h-4" />
+                    Profile
+                  </Link>
+
+                  <Link
+                    href={getDashboardHref()}
+                    onClick={() => setIsOpen(false)}
+                    className="flex items-center gap-2 p-2 rounded-lg text-base font-medium text-muted-foreground hover:bg-accent"
+                  >
+                    <LayoutDashboard className="w-4 h-4" />
+                    Dashboard
+                  </Link>
+
+                  <button
+                    onClick={handleLogout}
+                    className="w-full flex items-center gap-2 p-2 rounded-lg text-base font-medium text-destructive hover:bg-destructive/10 transition-colors text-left"
+                  >
+                    <LogOut className="w-4 h-4" />
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <Link
+                  href="/signIn"
+                  onClick={() => setIsOpen(false)}
+                  className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium bg-purple-600 hover:bg-purple-700 text-white transition-all shadow-md"
+                >
+                  <LogIn className="w-4 h-4" />
+                  Login
+                </Link>
+              )}
+            </div>
+          )}
         </div>
       )}
     </nav>
