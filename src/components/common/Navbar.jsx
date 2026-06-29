@@ -137,9 +137,9 @@ export default function Navbar() {
 
                 {/* Dropdown Card (আকর্ষণীয় Background Color সহ) */}
                 {isDropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-56 rounded-xl border border-purple-500/20 bg-gradient-to-b from-background via-purple-950/10 to-background p-1.5 shadow-xl shadow-purple-500/5 backdrop-blur-xl animate-in fade-in-50 zoom-in-95 duration-100">
+                  <div className="absolute right-0 mt-2 w-56 rounded-xl border border-purple-500/20 bg-linear-to-b from-background via-purple-950/10 to-background p-1.5 shadow-xl shadow-purple-500/5 backdrop-blur-xl animate-in fade-in-50 zoom-in-95 duration-100">
                     <div className="px-3 py-2 border-b border-border/60 mb-1">
-                      <p className="text-sm font-semibold truncate bg-clip-text bg-gradient-to-r from-foreground to-foreground/80">
+                      <p className="text-sm font-semibold truncate bg-clip-text bg-linear-to-r from-foreground to-foreground/80">
                         {user.name}
                       </p>
                       <p className="text-xs text-muted-foreground truncate">
