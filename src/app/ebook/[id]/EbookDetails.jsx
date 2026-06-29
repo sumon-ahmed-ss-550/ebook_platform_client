@@ -250,7 +250,6 @@ export default function EbookDetails({ bookId }) {
             ))}
           </motion.div>
 
-          {/* Interactive Navigation Tab Interface */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
